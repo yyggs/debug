@@ -1,17 +1,53 @@
 #include <stdio.h>
-int main () {
-int year, month, day;
-char operator;
-operator = -
- scanf("%d%c%d%c%d", &year, &operator, &month, &operator, &day);    
-    if ((month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12) && (day >= 1 && day <=31)) {
-        printf("YES");
-	} else if ((month == 4 || month == 6 || month == 9 || month == 11)  && (day >=1 && day <= 30)) {
-        printf("YES");
-    } else if (month == 2 && day == 29 && ((year % 100 != 0 && year % 4 == 0) || year % 400 == 0)) {
-        printf("YES");
-    } else {
-        printf("NO");
+#include <string.h>
+#include <math.h>
+
+int main() {
+    int r = 0;
+    int w = 0;
+    int x = 0;
+    char plus[2] = "+";
+    char minus[2] = "-";
+    char oprator[2] = "@";
+    char rr[2] = "r";
+    char ww[2] = "w";
+    char xx[2] = "x";
+    char input;
+    while (scanf("%c", &input) != EOF) {
+        char str[2] = "\0";
+        str[0] = input;
+        if (strcmp(str, rr) == 0){
+            if (!strcmp(oprator, plus)) {
+                r = 1;
+            } else if (!strcmp(oprator, minus)) {
+                r = 0;
+            } else {
+                r = 1;
+            }
+        } else if (strcmp(str, ww) == 0) {
+            if (!strcmp(oprator, plus)){
+                w = 1;
+            } else if (!strcmp(oprator, minus)) {
+                w = 0;
+            } else {
+                w = 1;
+            }
+        } else if(strcmp(str, xx) == 0) {
+            if (!strcmp(oprator, plus)) {
+                x = 1;
+            } else if (!strcmp(oprator, minus)) {
+                x = 0;
+            } else {
+                x = 1;
+            }
+        } else if (strcmp(str, plus) == 0) {
+            oprator[0] = '+';
+        } else if (strcmp(str, minus) == 0) {
+            oprator[0] = '-';
+        }
     }
-	return 0;	     
+    int output = x * pow(2,0) + w * pow(2,1) + r * pow(2,2);
+    printf("%d", output);
+    
+    return 0;
 }

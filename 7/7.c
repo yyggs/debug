@@ -1,21 +1,63 @@
 #include <stdio.h>
-int main()
-{
-    int Year,Month,Date;
-    int Leapyear,Datevalid,Februaryvalid,Month30valid,Month31valid;
-    scanf("%d-%d-%d",&Year,&Month,&Date);
-    
-    Leapyear=(((Year%100!=0&&Year%4==0)||Year%400==0)==1?1:0);  //1代表闰年，2月有29日
-    Februaryvalid=(Leapyear==0&&Month==2&&Date<29)||(Leapyear==1&&Month==2&&Date<30);
-    Month30valid=(Month==4||6||9||11)&&(Date<31);
-    Month31valid=(Month==1||3||5||7||8||10||12)&&(Date<32);
-    Datevalid=Februaryvalid||Month30valid||Month31valid;
-    //printf("%d\n%d\n%d\n",Month31valid,Month==1||3||5||7||8||10||12,Month==8);//调试用
-    if(Datevalid==1){
-        printf("YES");
+#include <string.h>
+void add(char);
+void delete(char);
+int rwx = 0;
+int main() {
+    char temp, temp1[100];
+    scanf("%s", &temp1);
+    if (temp1[0] == 'x') {
+        rwx ^= (1 << 0);
+    } else if (temp1[0] == 'w') {
+        rwx ^= (1 << 1);
+        if (temp1 == 'wx') {
+            rwx ^= (1 << 0);
+            rwx ^= (1 << 1);
+        }
+    } else if (temp1[0] == 'r') {
+        rwx ^= (1 << 2);
+        if (temp1[1] == 'w') {
+            rwx ^= (1 << 1);
+        }
+        if (temp1[1] == 'x') {
+            rwx ^= (1 << 0);
+        }
+        if (temp1[1] == 'w' && temp1[2] == 'x') {
+            rwx ^= (1 << 0);
+            rwx ^= (1 << 1);
+        }
     }
-    else{
-        printf("NO");
+    while (scanf("%c", &temp) != EOF) {
+        if (temp == '+') {
+            scanf("%c", &temp);
+            add(temp);
+        } else if (temp == '-') {
+            scanf("%c", &temp);
+            delete(temp);
+        }
     }
+    printf("%d", rwx);
     return 0;
+}
+
+void add(char input) 
+{
+    if (input == 'r' && rwx / 4 != 1) {
+        rwx ^= (1 << 2);
+    } else if (input == 'w' && ((rwx / 2) % 2 != 1)) {
+        rwx ^= (1 << 1);
+    } else if (rwx % 4 == 1 || rwx % 4 == 2) {
+        rwx ^= (1 << 0);
+    }
+}
+
+void delete(char input) 
+{
+    if (input == 'r' && rwx / 4 == 1) {
+        rwx ^= (1 << 2);
+    } else if (input == 'w' && ((rwx / 2) % 2 == 1)) {
+        rwx ^= (1 << 1);
+    } else if (rwx % 4 == 1 || rwx % 4 == 3) {
+        rwx ^= (1 << 0);
+    }
 }
