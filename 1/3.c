@@ -4,7 +4,9 @@
 
 double bisection(int p, int q, double (*func)(int, int, double));
 double f(int p, int q, double x);
-int main() {
+
+int main() 
+{
     int p;
     int q;
     scanf("%d%d", &p, &q);
@@ -12,17 +14,20 @@ int main() {
     return 0;
 }
 
-double bisection(int p, int q, double (*func)(int, int, double)) {
-	double a = 20.0,b = -20.0;
+double bisection(int p, int q, double (*func)(int, int, double)) 
+{
+    double max = 20.0;
+    double min = -20.0;
     double m;
-    while(1){
-        m = (a + b) / 2;
-        if(f(p,q,m) < EPSILON){
+    while(1) {
+        m = (max + min) / 2;
+    double c=f(p,q,m);
+        if(fabs(c) < EPSILON) {
             return m;
-        }else if(f(p,q,a) * f(p,q,m) < 0){
-            a = m;
-        }else{
-            b = m;
+        } else if(f(p,q,max) * c < 0) {
+            min = m;
+        } else {
+            max = m;
         }
     }
 }
