@@ -1,0 +1,20 @@
+#include <stdio.h>
+
+int main() 
+{
+    int N;
+    int step[500];
+    int i;
+    
+    scanf("%d", &N);
+    step[0] = 0;
+    step[1] = 0;
+    step[2] = 1;
+    step[3] = 1;
+    step[4] = 1;
+    for (i = 5; i <= N; i++){
+        step[i] = step[i - 2] + step[i - 3];
+    }
+    printf("%d", step[N]);
+    return 0;
+}
