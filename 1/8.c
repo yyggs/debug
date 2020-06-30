@@ -12,25 +12,24 @@ int main() {
     return 0;
 }
 
-double bisection(int p, int q, double (*func)(int, int, double)) {
+double bisection(int p, int q, double (*func)(int, int, double)) 
+{
     double a = -20.0;
-    double b = 20.0;
-    double x = 0.0;
+    double b =  20.0;
+    double x =  0.0;
     double fa, fb, fx;
-    
     do {
         fa = f(p, q, a);
         fb = f(p, q, b);
         x = (a + b) / 2.0;
         fx = f(p, q, x);
-        
-        if (fa > 0 && fx > 0) {
+        if (fa > 0 && fx > 0 || fa < 0 && fx < 0) {
             a = x;
-        } else{
+        }else {
             b = x;
         }
-    } while (fx >= EPSILON);
-    
+    } while (fabs(fx) >= EPSILON);
+
     return x;
 }
 
