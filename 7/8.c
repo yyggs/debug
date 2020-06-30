@@ -1,47 +1,36 @@
-#include <stdio.h>
-
-int main() {
-    char n;
-    int a[3] = {0, 0, 0};
-    while (scanf("%c" , &n) !=EOF) {
-        if (n == '\n') {
-            continue;
+#include<stdio.h>
+int main()
+{
+    int y,m,d;
+    scanf("%d-%d-%d",&y,&m,&d);
+    if (m == 1 || m == 3 || m == 5 || m == 7 || m == 8 || m ==10 || m == 12) {
+        if (d<=31) {
+            printf("YES");
+        } else {
+            printf("NO");
         }
-        if (n == 'r') {
-            a[0]=1;
+    } else if (m != 2) {
+        if (m >= 12) {
+            printf("NO");
+        } else if (d<=30) {
+            printf("YES");
+        } else {
+            printf("NO");
         }
-        if (n == 'w') {
-            a[1]=1;
-        }
-        if (n == 'x') {
-            a[2]=1;
-        }
-        if (n == '+') {
-            scanf("%c", &n);
-            if (n == 'r') {
-                a[0]=1;
+    } else {
+        if ((y % 100 != 0 && y % 4 == 0) || y % 400 == 0) {
+            if (d <= 29) {
+                printf("YES");
+            } else {
+                printf("NO");
             }
-            if (n == 'w') {
-                a[1]=1;
+        } else {
+            if (d <= 28) {
+                printf("YES");
+            } else {
+                printf("NO");
             }
-            if (n == 'x') {
-                a[2]=1;
-            }  
-        }
-        if (n == '-') {
-           scanf("%c" , &n);
-           if (n == 'r') {
-               a[0]=0;
-           }
-           if (n == 'w') {
-               a[1]=0;
-           }
-           if (n == 'x') {
-               a[2]=0;
-           }  
-        } 
+        }    
     }
-    int o = a[0] * 2 * 2 + a[1] * 2 + a[2];
-    printf("%d", o);
     return 0;
 }

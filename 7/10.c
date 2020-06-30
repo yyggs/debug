@@ -1,55 +1,40 @@
-#include <stdio.h>
-#include <string.h>
-
+#include<stdio.h>
+#include<math.h>
 int main() {
-    char pms[3];
-    char change_pms[100][2];
-    int i;
-    i = 0;
-    int j;
-    int a;
-    a = 0;
-    int b;
-    b = 0;
-    int c;
-    c = 0;
-    scanf("%s", pms);
-    for (i = 0; i < 3; i++) {
-        if (pms[i] == 'r') {
-            a += 4;
-        } else if (pms[i] == 'w') {
-            a += 2;
-        } else if (pms[i] == 'x') {
-            a += 1;
-        } 
-    }
-    i = 0;
-    char temp[3];
-    while (scanf("%s", temp) != EOF) {
-        strcpy(change_pms[i],temp);
-        i++;
-    }
-    c = i;
-    for (i = 0; i < c; i++) {
-        j = 0;
-        if (change_pms[i][j] == '+') {
-            if (change_pms[i][j + 1] == 'r') {
-               b += 4;   
-            } else if (change_pms[i][j + 1] == 'w') {
-                b += 2;
-            } else if (change_pms[i][j + 1] == 'x') {
-                b += 1;
-            }
-        } else if (change_pms[i][j] == '-') {
-            if (change_pms[i][j + 1] == 'r') {
-                b -= 4;   
-            } else if (change_pms[i][j + 1] == 'w') {
-                b -= 2;
-            } else if (change_pms[i][j + 1] == 'x') {
-                b -= 1;
-            }
-        }
-    }
-    printf("%d", a + b);
-    return 0;
+    int a, b, c;
+    scanf("%d-%d-%d", &a, &b, &c);
+    if ((b < 1) || (b > 12)) {
+        printf("NO");
+    } else if ((b == 1) && ((c < 1) || (c > 31))) {
+        printf("NO");
+    } else if ((b == 3) && ((c < 1) || (c > 31))) {
+        printf("NO");
+    } else if ((b == 4) && ((c < 1) || (c > 30))) {
+        printf("NO");
+    } else if ((b == 5) && ((c < 1) || (c > 31))) {
+        printf("NO");
+    } else if ((b == 6) && ((c < 1) || (c > 30))) {
+        printf("NO");
+    } else if ((b == 7) && ((c < 1) || (c > 31))) {
+        printf("NO");
+    } else if ((b == 8) && ((c < 1) || (c > 31))) {
+        printf("NO");
+    } else if ((b == 9) && ((c < 1) || (c > 30))) {
+        printf("NO");
+    } else if ((b == 10) && ((c < 1) || (c > 31))) {
+        printf("NO");
+    } else if ((b == 11) && ((c < 1) || (c > 30))) {
+        printf("NO");
+    } else if ((b == 12) && ((c < 1) || (c > 31))) {
+        printf("NO");
+    } else if ((a % 400 == 0) && (b == 2) && (c < 1 || c > 29)) {
+        printf("NO");
+    } else if ((a % 100 == 0 && a % 400 != 0) && (b == 2) && (c < 1 || c > 28)) {
+        printf("NO");
+    } else if ((a % 4 == 0) && (a % 100 != 0) && (b == 2) && (c < 1 || c > 29)) {
+        printf("NO");
+    } else {
+        printf("YES");
+    }    
+    return 0;    
 }
